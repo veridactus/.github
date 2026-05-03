@@ -1,27 +1,37 @@
 # 📘 VERIDACTUS Protocol Specification v1.0.0
 
 <p align="center">
-  <img src="assets/logos/veridactus-logo-horizontal.svg" alt="VERIDACTUS Logo" width="480"/>
+  <img src="assets/logos/veridactus-logo-hd.png" alt="VERIDACTUS Protocol - The Verifiable Execution Layer for AI Agents" width="640"/><br/>
+  <img src="https://img.shields.io/badge/Version-1.0.0-Stable-blue?style=for-the-badge" alt="Version"/>
+  <img src="https://img.shields.io/badge/License-Apache_2.0-blue?style=for-the-badge" alt="License"/>
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License"></a>
   <a href="spec/1.0_abstract_and_scope.md"><img src="https://img.shields.io/badge/Status-Stable_Release-brightgreen" alt="Status"></a>
   <a href="conformance/v1/certification_criteria.md"><img src="https://img.shields.io/badge/Conformance-Automated_Certification-blueviolet" alt="Conformance"></a>
   <a href="spec/2.0_terminology_and_notation.md"><img src="https://img.shields.io/badge/Semantics-RFC_2119_Precision-4B0082" alt="RFC 2119"></a>
   <a href="GOVERNANCE.md"><img src="https://img.shields.io/badge/Governance-Open_Meritocracy-38BDF8" alt="Governance"></a>
 </p>
 
-> **The Verifiable Execution Layer for AI Agents**  
-> VERIDACTUS transforms every LLM invocation into a **deterministic, cryptographically verifiable engineering event**.  
-> No server. No secret. No trust required.  
-> *A verdict you can verify — not a black box you must blindly trust.*
+<p align="center">
+  <strong>The Verifiable Execution Layer for AI Agents</strong><br/>
+  <em>VERIDACTUS transforms every LLM invocation into a <strong>deterministic, cryptographically verifiable engineering event</strong>.</em><br/>
+  No server. No secret. No trust required.<br/>
+  <strong><em>A verdict you can verify — not a black box you must blindly trust.</em></strong>
+</p>
+
+<p align="center">
+  <a href="#-quick-start">⚡ Quick Start</a> •
+  <a href="#-documentation">📚 Documentation</a> •
+  <a href="#-community">🌐 Community</a> •
+  <a href="#-conformance">✅ Conformance</a>
+</p>
 
 ---
 
 ## 🌐 Language / 语言
 
-[**🇬🇧 English**](README.md) · [**🇨🇳 中文**](README-zh.md)
+[**🇬 English**](README.md) · [**🇨🇳 中文**](README-zh.md)
 
 ---
 
