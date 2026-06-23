@@ -1,21 +1,31 @@
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/veridactus/.github/main/assets/logo-dark.svg">
-    <img alt="VERIDACTUS" src="https://raw.githubusercontent.com/veridactus/.github/main/assets/logo-light.svg" width="560">
+    <img alt="VERIDACTUS — The Verifiable Execution Layer for AI Agents" src="https://raw.githubusercontent.com/veridactus/.github/main/assets/logo-light.svg" width="600">
   </picture>
 </p>
 
 <p align="center">
-  <strong>Open Governance for LLM Inference</strong><br>
-  <sub>Deterministic constraints · Cryptographic audit · Streaming budget control · Zero‑trust</sub>
+  <strong>The Verifiable Execution Layer for AI Agents</strong><br>
+  <em>Transform every LLM invocation into a deterministic, cryptographically verifiable engineering event.</em><br>
+  <strong>No server. No secret. No trust required.</strong>
 </p>
 
 <p align="center">
   <a href="https://github.com/veridactus/veridactus/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square" alt="License"></a>
-  <a href="https://github.com/veridactus/docs"><img src="https://img.shields.io/badge/spec-v0.2.1-38BDF8?style=flat-square" alt="Specification"></a>
+  <a href="https://docs.veridactus.ai/specification/latest"><img src="https://img.shields.io/badge/spec-v0.2.1-38BDF8?style=flat-square" alt="Specification"></a>
   <a href="https://docs.veridactus.ai"><img src="https://img.shields.io/badge/docs-docs.veridactus.ai-0ea5e9?style=flat-square" alt="Documentation"></a>
   <a href="https://github.com/veridactus/veridactus"><img src="https://img.shields.io/badge/Rust-1.75+-orange?style=flat-square&logo=rust" alt="Rust"></a>
   <a href="https://github.com/veridactus/veridactus"><img src="https://img.shields.io/badge/Go-1.21+-00ADD8?style=flat-square&logo=go" alt="Go"></a>
+  <a href="https://github.com/veridactus/veridactus"><img src="https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=flat-square&logo=typescript" alt="TypeScript"></a>
+</p>
+
+<p align="center">
+  <a href="#-quick-start">⚡ Quick Start</a> ·
+  <a href="#-why-veridactus">🎯 Why</a> ·
+  <a href="#-architecture">🏗 Architecture</a> ·
+  <a href="#-repositories">📦 Repos</a> ·
+  <a href="#-community">🌐 Community</a>
 </p>
 
 ---
@@ -26,15 +36,88 @@
 
 ---
 
-## 🎯 Why VERIDACTUS?
+## 🧭 The Name As a Design Contract
 
-LLM inference is inherently probabilistic — but governance demand is deterministic. Compliance officers need hard budget limits, auditors need offline‑verifiable records, and platform engineers need drop‑in integration that doesn't require a new protocol.
+Great protocols are named after the thing they guarantee. `VERIDACTUS` is no exception.
 
-| For Auditors | For Engineers | For Business |
-|:---|:---|:---|
-| Offline‑verifiable SHA‑256 audit proofs | Drop‑in HTTP headers (no custom protocol) | Real‑time streaming budget enforcement |
-| Recursive non‑signature field stripping | Compatible with any OpenAI‑compatible API | Micro‑dollar precision cost metering |
-| Evidence‑chain lineage via `parent_id` | Sidecar, Gateway, or SDK deployment | Privacy‑tiered storage (raw/masked/hash_only) |
+| Root | Origin | Meaning | Protocol Mapping |
+|:-----|:-------|:--------|:-----------------|
+| **`Verus`** | Latin | *true, real, verified* | Cryptographic integrity — every trace is independently provable via RFC 8785 + SHA‑256 |
+| **`Actus`** | Latin | *action, execution, legal deed* | Enforcement backbone — streaming budget cutoffs, privacy masking, deterministic replay |
+
+**Together**: *a verified deed of execution*. The protocol doesn't just observe what an AI did — it cryptographically proves **the contract under which it acted**.
+
+---
+
+## 🌐 Strategic Positioning in the AI Stack
+
+The AI agent revolution has solved **connectivity** and **coordination** — but left a foundational gap: **verifiability**.
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                   AI Agent Applications                  │
+├─────────────────────────────────────────────────────────┤
+│  Coordination Layer     │  MCP · A2A · mAgent           │
+├─────────────────────────────────────────────────────────┤
+│  Connectivity Layer     │  REST APIs · gRPC · WebSocket  │
+├─────────────────────────────────────────────────────────┤
+│  ✅ VERIDACTUS          │  Verifiable Execution Layer    │
+├─────────────────────────────────────────────────────────┤
+│  LLM Providers          │  OpenAI · Anthropic · etc.     │
+└─────────────────────────────────────────────────────────┘
+```
+
+VERIDACTUS is **orthogonal, not competitive**. It acts as a transparent governance proxy — no client code changes, no extra network hops.
+
+### Protocol Comparison
+
+| Aspect | MCP (Anthropic) | A2A (Google) | IETF AAT | **VERIDACTUS** |
+|:-------|:----------------|:-------------|:---------|:---------------|
+| **Purpose** | Tool connectivity | Agent coordination | Audit log format | **Verifiable execution proof** |
+| **Core Question** | *Can the agent reach the tool?* | *Can agents talk?* | *What happened?* | ***How, why, and under what rules?*** |
+| **Verification** | Out of scope | Out of scope | Trust in logging | **Zero‑trust, offline mathematical proof** |
+| **Runtime Enforcement** | None | None | None | **Real‑time budget cutoff, privacy masking** |
+| **Cryptographic Integrity** | None | None | None | **JCS + SHA‑256 hash chain** |
+
+> MCP connects tools. A2A coordinates agents. AAT records events. **VERIDACTUS delivers the cryptographic verdict that those events are true.**
+
+---
+
+## 🧠 Core Abstraction: The Execution Contract
+
+Every LLM call is modeled as a verifiable **four‑tuple lifecycle** that turns probabilistic inference into an auditable engineering event:
+
+```
+  📥 Input ──▶ ⚙️ Constraints ──▶ 📈 Observations ──▶ 🔐 Proofs
+  Request        Declared            Runtime             Cryptographic
+  snapshot       boundaries          telemetry           verdict
+```
+
+| Tuple | Generated When | Protocol Guarantee |
+|:------|:---------------|:-------------------|
+| **📥 Input** | `INIT` phase | Immutable baseline for diff & replay |
+| **⚙️ Constraints** | `CONSTRAINT_EVAL` phase | Violations block upstream *before* tokens consumed |
+| **📈 Observations** | `EXECUTING` → `VALIDATION` | Real‑time budget cutoff, degrade strategies |
+| **🔐 Proofs** | `FINALIZED` or `FAILED` | Any party can recompute offline — no key, no database |
+
+---
+
+## 🔒 Zero‑Trust Verification: Proven True, Not Trusted
+
+VERIDACTUS operates on a radical assumption: **the network, the proxy, even the storage are all hostile**. Independent verification requires only three public things:
+
+```bash
+# Offline verification — no proxy, no SDK, no central authority
+# Step 1: Strip non‑contract fields, canonicalize per RFC 8785
+jq 'del(._*, .observations.internal_metrics)' trace.json | \
+  v8s jcs | sha256sum
+
+# Step 2: Compare against trace.proofs.audit_signature
+# ✅ Match → The verdict is intact. The execution contract is unbroken.
+# ❌ Mismatch → Tampering detected. Investigation required.
+```
+
+> 🔐 *This is the cryptographic equivalent of a judicial evidence seal. If the seal is broken, the evidence is inadmissible. VERIDACTUS seals every single AI action the same way.*
 
 ---
 
@@ -66,6 +149,18 @@ LLM inference is inherently probabilistic — but governance demand is determini
 
 ---
 
+## 🎯 Why VERIDACTUS?
+
+LLM inference is inherently probabilistic — but governance demand is deterministic.
+
+| For Auditors | For Engineers | For Business |
+|:---|:---|:---|
+| Offline‑verifiable SHA‑256 audit proofs | Drop‑in HTTP headers (no custom protocol) | Real‑time streaming budget enforcement |
+| Recursive non‑signature field stripping | Compatible with any OpenAI‑compatible API | Micro‑dollar precision cost metering |
+| Evidence‑chain lineage via `parent_id` | Sidecar, Gateway, or SDK deployment | Privacy‑tiered storage (raw/masked/hash_only) |
+
+---
+
 ## 🔐 Cryptographic Proof Chain
 
 | Level | Type | Mechanism | Status |
@@ -77,14 +172,12 @@ LLM inference is inherently probabilistic — but governance demand is determini
 
 ---
 
-## 🛡 Governance Pipeline
-
-7 production plugins enforce policy at every stage of the LLM request lifecycle:
+## 🛡 Governance Pipeline — 7 Production Plugins
 
 | Plugin | Stage | Capability |
 |:-------|:------|:-----------|
 | `BudgetGuard` | pre_request | Micro‑dollar budget control ($0.000001 precision) |
-| `PiiDetector` | pre_request | PII detection & masking (regex + NER patterns) |
+| `PiiDetector` | pre_request | PII detection & masking (regex + NER) |
 | `InputSanitizer` | pre_request | Prompt injection & jailbreak defense |
 | `G1InputFilter` | pre_request | OWASP‑aligned input safety guard |
 | `G2OutputFilter` | post_response | Harmful content output guard |
@@ -97,13 +190,44 @@ LLM inference is inherently probabilistic — but governance demand is determini
 
 | Capability | Description | Compliance Impact |
 |:-----------|:------------|:------------------|
-| 🔐 **Cryptographic Verdict** | JCS + SHA‑256 hash over the full Execution Contract | EU AI Act, HIPAA, SOC 2 |
-| 💰 **Streaming Budget** | Real‑time SSE budget enforcement with atomic hard‑stop | AI FinOps, cost governance |
-| 🛡️ **Privacy Grading** | `raw` → `masked` → `hash_only` → TEE‑Private | GDPR, CCPA right‑to‑erasure |
+| 🔐 **Cryptographic Verdict** | JCS + SHA‑256 hash over the full Execution Contract | EU AI Act · HIPAA · SOC 2 |
+| 💰 **Streaming Budget** | Real‑time SSE enforcement with atomic hard‑stop | AI FinOps · cost governance |
+| 🛡️ **Privacy Grading** | `raw` → `masked` → `hash_only` → TEE‑Private | GDPR · CCPA right‑to‑erasure |
 | 🔄 **Deterministic Replay** | RFC 8785 canonicalized reproducible traces | Model regression CI/CD |
 | 🔗 **Delegation Chain** | Composite attestation (Ed25519 + TEE + ZK) | Multi‑agent trust chains |
 | 🔍 **OWASP ASI Top 10** | Full alignment with ASI01–ASI10 | Agentic AI security compliance |
-| 📋 **Auto‑Compliance** | EU AI Act / NIST AI 600‑1 reports per inference | Regulatory audit readiness |
+| 📋 **Auto‑Compliance** | EU AI Act / NIST AI 600‑1 per inference | Regulatory audit readiness |
+
+---
+
+## 🌍 Standards & Compliance Alignment
+
+VERIDACTUS is built for the regulatory reality of AI:
+
+| Standard / Framework | VERIDACTUS Mapping |
+|:---------------------|:-------------------|
+| **NIST AI RMF 1.0** | `constraints` → GOVERN, `observations` → MAP, `risk` → MEASURE, `audit` → MANAGE |
+| **ISO/IEC 42001** | Execution lifecycle + tamper‑evident proofs support AIMS from day one |
+| **GDPR / CCPA** | Privacy grading, TTL expiry, deletion audit logs |
+| **EU AI Act (Art. 12)** | Cryptographically signed logs fulfil record‑keeping for high‑risk AI |
+| **W3C PROV** | Lineage via `parent_id` ⇔ `prov:wasDerivedFrom` |
+| **OWASP LLM Top 10 v2.0** | Threat model covers prompt injection, unbounded consumption, insecure output |
+
+> 🏛️ Your compliance playbook already exists. VERIDACTUS just gives it **cryptographic teeth**.
+
+---
+
+## 🏅 Conformance Certification
+
+Certification is **fully automated, objective, and no‑gatekeeper**. Implementations earn badges by passing public test vectors:
+
+| Tier | Requirements | Badge |
+|:-----|:-------------|:------|
+| 🔵 **Core Compatible** | Schema validation + Proof integrity + Header negotiation | `VERIDACTUS Core Compatible` |
+| 🟢 **Full Compatible** | Core + Budget enforcement + State machine + Error contract | `VERIDACTUS Full Compatible` |
+| 🟡 **Extended Compatible** | Full + ≥2 official extensions | `VERIDACTUS Extended Compatible` |
+
+Each badge is a live link to the public, verifiable compliance report. No human review, no commercial fee.
 
 ---
 
@@ -125,10 +249,10 @@ curl -X POST http://localhost:8080/v1/chat/completions \
   }'
 
 # 3. Every response carries a cryptographically‑signed VERIDACTUS-Trace-Id
-#    Verify it offline — no central database required
+#    Verify it independently — no central database required
 ```
 
-> 📖 Full guide at [docs.veridactus.ai/quickstart](https://docs.veridactus.ai/quickstart) · [Protocol Specification v0.2.1](https://docs.veridactus.ai/specification/latest)
+> 📖 [Quickstart Guide](https://docs.veridactus.ai/quickstart) · [Protocol Specification v0.2.1](https://docs.veridactus.ai/specification/latest)
 
 ---
 
@@ -140,6 +264,37 @@ curl -X POST http://localhost:8080/v1/chat/completions \
 | `veridactus/veridactus-cp` | Control Plane — config & auth | Go · SQLite · REST |
 | `veridactus/veridactus-ui` | Frontend — admin dashboard | React · ReactFlow |
 | `veridactus/veridactus-python-worker` | Worker — PII detection | Python |
+
+```bash
+curl -O https://raw.githubusercontent.com/veridactus/veridactus/main/deploy/docker-compose.yml
+docker-compose up -d
+```
+
+---
+
+## ⚖️ Design Tradeoffs
+
+We optimize for **verifiability with zero trust** — and we're explicit about the consequences.
+
+| Tradeoff | VERIDACTUS Stance |
+|:---------|:------------------|
+| **Real‑time vs. eventual integrity** | Constraints enforced in real time; cryptographic verdict generated *eventually*, verified offline |
+| **Trace fidelity vs. performance** | Trace depth is configurable — the spec defines *what must be captured*, never *how heavy the logger must be* |
+| **Compliance vs. agility** | Aligned with W3C PROV, IETF AAT, OTel GenAI; innovation happens in namespace‑isolated extensions |
+| **Human readability vs. storage** | Audit exports are always JSON; internal storage can be Parquet, Protobuf, etc. |
+
+---
+
+## 🗓️ Evolution Roadmap
+
+| Version | Timeline | Milestone |
+|:--------|:---------|:----------|
+| **v0.2.1** | Current | Core contract, cryptographic verdict, streaming budget, privacy grading |
+| **v1.0.0** | Upcoming | Stable protocol, backward‑compatible, production‑hardened |
+| **v1.1.0** | Planned | Batch governance, federated audit chains |
+| **v2.0.0** | Vision | Post‑quantum signatures, ZK proofs, TEE attestation |
+
+> 🔄 All v1.x releases guarantee **backward compatibility** for required contract fields. Major changes follow the [RFC process](https://github.com/veridactus/docs/blob/main/GOVERNANCE.md).
 
 ---
 
@@ -158,7 +313,7 @@ curl -X POST http://localhost:8080/v1/chat/completions \
 
 ## 🌐 Community & Governance
 
-VERIDACTUS follows an **Open Meritocracy** governance model. All RFCs and design decisions happen transparently on GitHub.
+VERIDACTUS follows an **Open Meritocracy** model steered by a Technical Steering Committee (TSC). All RFCs and design decisions happen transparently on GitHub.
 
 | Channel | Link |
 |:--------|:-----|
@@ -172,6 +327,26 @@ VERIDACTUS follows an **Open Meritocracy** governance model. All RFCs and design
 
 ---
 
+## 📄 Academic Citation
+
+If you use VERIDACTUS in research, please cite:
+
+```bibtex
+@misc{veridactus2026,
+  title        = {VERIDACTUS: A Verifiable Execution Protocol for AI Agents},
+  author       = {Lee, William and the VERIDACTUS Community},
+  year         = {2026},
+  howpublished = {\url{https://github.com/veridactus/docs}},
+  note         = {v0.2.1 Specification}
+}
+```
+
+---
+
 <p align="center">
-  <sub>Licensed under <a href="https://github.com/veridactus/veridactus/blob/main/LICENSE">Apache License 2.0</a> · Copyright 2026 The VERIDACTUS Authors</sub>
+  <sub>
+    Licensed under <a href="https://github.com/veridactus/veridactus/blob/main/LICENSE">Apache License 2.0</a>
+    · Copyright 2026 The VERIDACTUS Authors<br>
+    "VERIDACTUS" and the VERIDACTUS logo are marks of the VERIDACTUS Protocol community
+  </sub>
 </p>
