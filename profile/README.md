@@ -1,30 +1,35 @@
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/veridactus/.github/main/assets/logo-dark.svg">
-    <img alt="VERIDACTUS — The Verifiable Execution Layer for AI Agents" src="https://raw.githubusercontent.com/veridactus/.github/main/assets/logo-light.svg" width="600">
-  </picture>
+  <!-- GitHub native dark/light mode image switching -->
+  <img alt="VERIDACTUS — The Verifiable Execution Layer for AI Agents" src="https://raw.githubusercontent.com/veridactus/.github/main/assets/logo-light.svg#gh-light-mode-only" width="600">
+  <img alt="VERIDACTUS — The Verifiable Execution Layer for AI Agents" src="https://raw.githubusercontent.com/veridactus/.github/main/assets/logo-dark.svg#gh-dark-mode-only" width="600">
 </p>
 
+<h3 align="center">The Verifiable Execution Layer for AI Agents</h3>
 <p align="center">
-  <strong>The Verifiable Execution Layer for AI Agents</strong><br>
-  <em>Transform every LLM invocation into a deterministic, cryptographically verifiable engineering event.</em><br>
+  <em>Every LLM invocation becomes a deterministic, cryptographically verifiable engineering event.</em><br>
   <strong>No server. No secret. No trust required.</strong>
 </p>
 
 <p align="center">
-  <a href="https://github.com/veridactus/veridactus/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square" alt="License"></a>
-  <a href="https://docs.veridactus.ai/specification/latest"><img src="https://img.shields.io/badge/spec-v0.2.1-38BDF8?style=flat-square" alt="Specification"></a>
-  <a href="https://docs.veridactus.ai"><img src="https://img.shields.io/badge/docs-docs.veridactus.ai-0ea5e9?style=flat-square" alt="Documentation"></a>
+  <a href="https://github.com/veridactus/veridactus/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-blue?style=for-the-badge" alt="License"></a>
+  <a href="https://docs.veridactus.ai/specification/latest"><img src="https://img.shields.io/badge/spec-v0.2.1-38BDF8?style=for-the-badge" alt="Spec"></a>
+  <a href="https://docs.veridactus.ai"><img src="https://img.shields.io/badge/docs-online-0ea5e9?style=for-the-badge" alt="Docs"></a>
+</p>
+
+<p align="center">
   <a href="https://github.com/veridactus/veridactus"><img src="https://img.shields.io/badge/Rust-1.75+-orange?style=flat-square&logo=rust" alt="Rust"></a>
   <a href="https://github.com/veridactus/veridactus"><img src="https://img.shields.io/badge/Go-1.21+-00ADD8?style=flat-square&logo=go" alt="Go"></a>
   <a href="https://github.com/veridactus/veridactus"><img src="https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=flat-square&logo=typescript" alt="TypeScript"></a>
+  <a href="https://github.com/veridactus/veridactus"><img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python" alt="Python"></a>
+  <a href="https://hub.docker.com/u/veridactus"><img src="https://img.shields.io/badge/Docker-ready-2496ED?style=flat-square&logo=docker" alt="Docker"></a>
 </p>
 
 <p align="center">
   <a href="#-quick-start">⚡ Quick Start</a> ·
   <a href="#-why-veridactus">🎯 Why</a> ·
+  <a href="#-strategic-positioning">🌐 Positioning</a> ·
   <a href="#-architecture">🏗 Architecture</a> ·
-  <a href="#-repositories">📦 Repos</a> ·
+  <a href="#-zero-trust-verification">🔒 Trust Model</a> ·
   <a href="#-community">🌐 Community</a>
 </p>
 
@@ -49,7 +54,7 @@ Great protocols are named after the thing they guarantee. `VERIDACTUS` is no exc
 
 ---
 
-## 🌐 Strategic Positioning in the AI Stack
+## 🌐 Strategic Positioning
 
 The AI agent revolution has solved **connectivity** and **coordination** — but left a foundational gap: **verifiability**.
 
@@ -85,7 +90,7 @@ VERIDACTUS is **orthogonal, not competitive**. It acts as a transparent governan
 
 ## 🧠 Core Abstraction: The Execution Contract
 
-Every LLM call is modeled as a verifiable **four‑tuple lifecycle** that turns probabilistic inference into an auditable engineering event:
+Every LLM call is modeled as a verifiable **four‑tuple lifecycle**:
 
 ```
   📥 Input ──▶ ⚙️ Constraints ──▶ 📈 Observations ──▶ 🔐 Proofs
@@ -102,22 +107,25 @@ Every LLM call is modeled as a verifiable **four‑tuple lifecycle** that turns 
 
 ---
 
-## 🔒 Zero‑Trust Verification: Proven True, Not Trusted
+## 🔒 Zero‑Trust Verification
 
 VERIDACTUS operates on a radical assumption: **the network, the proxy, even the storage are all hostile**. Independent verification requires only three public things:
 
+1. The raw Trace JSON
+2. The public [RFC 8785 JSON Canonicalization Scheme](https://www.rfc-editor.org/rfc/rfc8785)
+3. Any SHA‑256 implementation
+
 ```bash
 # Offline verification — no proxy, no SDK, no central authority
-# Step 1: Strip non‑contract fields, canonicalize per RFC 8785
 jq 'del(._*, .observations.internal_metrics)' trace.json | \
   v8s jcs | sha256sum
 
-# Step 2: Compare against trace.proofs.audit_signature
-# ✅ Match → The verdict is intact. The execution contract is unbroken.
-# ❌ Mismatch → Tampering detected. Investigation required.
+# Compare against trace.proofs.audit_signature
+# ✅ Match → The verdict is intact.
+# ❌ Mismatch → Tampering detected.
 ```
 
-> 🔐 *This is the cryptographic equivalent of a judicial evidence seal. If the seal is broken, the evidence is inadmissible. VERIDACTUS seals every single AI action the same way.*
+> 🔐 *This is the cryptographic equivalent of a judicial evidence seal. VERIDACTUS seals every single AI action the same way.*
 
 ---
 
@@ -142,22 +150,20 @@ jq 'del(._*, .observations.internal_metrics)' trace.json | \
 
 ## 📦 Repositories
 
-| Repository | Purpose | Status |
-|:-----------|:--------|:-------|
-| [**veridactus**](https://github.com/veridactus/veridactus) | Core implementation — Rust data plane, Go control plane, React UI, protocol docs | ![Active](https://img.shields.io/badge/active-brightgreen?style=flat-square) |
-| [**docs**](https://github.com/veridactus/docs) | Protocol specification v0.2.1, JSON schemas, OpenAPI, conformance suite, RFCs | ![Active](https://img.shields.io/badge/active-brightgreen?style=flat-square) |
+| Repository | Purpose |
+|:-----------|:--------|
+| [**veridactus**](https://github.com/veridactus/veridactus) | Core implementation — Rust data plane, Go control plane, React UI, protocol docs |
+| [**docs**](https://github.com/veridactus/docs) | Protocol specification v0.2.1, JSON schemas, OpenAPI, conformance suite, RFCs |
 
 ---
 
 ## 🎯 Why VERIDACTUS?
 
-LLM inference is inherently probabilistic — but governance demand is deterministic.
-
 | For Auditors | For Engineers | For Business |
 |:---|:---|:---|
 | Offline‑verifiable SHA‑256 audit proofs | Drop‑in HTTP headers (no custom protocol) | Real‑time streaming budget enforcement |
 | Recursive non‑signature field stripping | Compatible with any OpenAI‑compatible API | Micro‑dollar precision cost metering |
-| Evidence‑chain lineage via `parent_id` | Sidecar, Gateway, or SDK deployment | Privacy‑tiered storage (raw/masked/hash_only) |
+| Evidence‑chain lineage via `parent_id` | Sidecar, Gateway, or SDK deployment | Privacy‑tiered storage |
 
 ---
 
@@ -165,9 +171,9 @@ LLM inference is inherently probabilistic — but governance demand is determini
 
 | Level | Type | Mechanism | Status |
 |:------|:-----|:----------|:-------|
-| **L0** | Hash Chain | SHA‑256 integrity via JCS (RFC 8785) canonicalization | ✅ Production |
-| **L1** | TEE Attestation | Hardware enclave (Intel TDX, AMD SEV‑SNP, NVIDIA CC) | 🟡 Type defs |
-| **L2A** | Sampling Verification | Merkle tree random sampling (IMMACULATE framework) | ✅ Production |
+| **L0** | Hash Chain | SHA‑256 integrity via JCS (RFC 8785) | ✅ Production |
+| **L1** | TEE Attestation | Intel TDX · AMD SEV‑SNP · NVIDIA CC | 🟡 Type defs |
+| **L2A** | Sampling Verification | Merkle tree random sampling (IMMACULATE) | ✅ Production |
 | **L2B** | Zero-Knowledge | NANOZK‑style layered commitment proofs | ✅ Production |
 
 ---
@@ -190,28 +196,26 @@ LLM inference is inherently probabilistic — but governance demand is determini
 
 | Capability | Description | Compliance Impact |
 |:-----------|:------------|:------------------|
-| 🔐 **Cryptographic Verdict** | JCS + SHA‑256 hash over the full Execution Contract | EU AI Act · HIPAA · SOC 2 |
+| 🔐 **Cryptographic Verdict** | JCS + SHA‑256 over the full Execution Contract | EU AI Act · HIPAA · SOC 2 |
 | 💰 **Streaming Budget** | Real‑time SSE enforcement with atomic hard‑stop | AI FinOps · cost governance |
 | 🛡️ **Privacy Grading** | `raw` → `masked` → `hash_only` → TEE‑Private | GDPR · CCPA right‑to‑erasure |
 | 🔄 **Deterministic Replay** | RFC 8785 canonicalized reproducible traces | Model regression CI/CD |
 | 🔗 **Delegation Chain** | Composite attestation (Ed25519 + TEE + ZK) | Multi‑agent trust chains |
-| 🔍 **OWASP ASI Top 10** | Full alignment with ASI01–ASI10 | Agentic AI security compliance |
-| 📋 **Auto‑Compliance** | EU AI Act / NIST AI 600‑1 per inference | Regulatory audit readiness |
+| 🔍 **OWASP ASI Top 10** | Full alignment with ASI01–ASI10 | Agentic AI security |
+| 📋 **Auto‑Compliance** | EU AI Act / NIST AI 600‑1 per inference | Regulatory readiness |
 
 ---
 
 ## 🌍 Standards & Compliance Alignment
 
-VERIDACTUS is built for the regulatory reality of AI:
-
 | Standard / Framework | VERIDACTUS Mapping |
 |:---------------------|:-------------------|
-| **NIST AI RMF 1.0** | `constraints` → GOVERN, `observations` → MAP, `risk` → MEASURE, `audit` → MANAGE |
-| **ISO/IEC 42001** | Execution lifecycle + tamper‑evident proofs support AIMS from day one |
+| **NIST AI RMF 1.0** | `constraints` → GOVERN, `observations` → MAP, `audit` → MANAGE |
+| **ISO/IEC 42001** | Execution lifecycle + tamper‑evident proofs support AIMS |
 | **GDPR / CCPA** | Privacy grading, TTL expiry, deletion audit logs |
-| **EU AI Act (Art. 12)** | Cryptographically signed logs fulfil record‑keeping for high‑risk AI |
+| **EU AI Act (Art. 12)** | Cryptographically signed logs for high‑risk AI record‑keeping |
 | **W3C PROV** | Lineage via `parent_id` ⇔ `prov:wasDerivedFrom` |
-| **OWASP LLM Top 10 v2.0** | Threat model covers prompt injection, unbounded consumption, insecure output |
+| **OWASP LLM Top 10 v2.0** | Threat model: prompt injection, unbounded consumption, insecure output |
 
 > 🏛️ Your compliance playbook already exists. VERIDACTUS just gives it **cryptographic teeth**.
 
@@ -219,25 +223,23 @@ VERIDACTUS is built for the regulatory reality of AI:
 
 ## 🏅 Conformance Certification
 
-Certification is **fully automated, objective, and no‑gatekeeper**. Implementations earn badges by passing public test vectors:
+Fully automated, objective, no‑gatekeeper. Implementations earn badges by passing public test vectors:
 
-| Tier | Requirements | Badge |
-|:-----|:-------------|:------|
-| 🔵 **Core Compatible** | Schema validation + Proof integrity + Header negotiation | `VERIDACTUS Core Compatible` |
-| 🟢 **Full Compatible** | Core + Budget enforcement + State machine + Error contract | `VERIDACTUS Full Compatible` |
-| 🟡 **Extended Compatible** | Full + ≥2 official extensions | `VERIDACTUS Extended Compatible` |
-
-Each badge is a live link to the public, verifiable compliance report. No human review, no commercial fee.
+| Tier | Requirements |
+|:-----|:-------------|
+| 🔵 **Core Compatible** | Schema validation + Proof integrity + Header negotiation |
+| 🟢 **Full Compatible** | Core + Budget enforcement + State machine + Error contract |
+| 🟡 **Extended Compatible** | Full + ≥2 official extensions |
 
 ---
 
 ## 🚀 Quick Start
 
 ```bash
-# 1. Start VERIDACTUS proxy (reference implementation)
+# 1. Start VERIDACTUS proxy
 docker run -p 8080:8080 ghcr.io/veridactus/veridactus:latest
 
-# 2. Send a governed inference request
+# 2. Send a governed request
 curl -X POST http://localhost:8080/v1/chat/completions \
   -H "Content-Type: application/json" \
   -H "VERIDACTUS-Version: 0.2" \
@@ -249,10 +251,9 @@ curl -X POST http://localhost:8080/v1/chat/completions \
   }'
 
 # 3. Every response carries a cryptographically‑signed VERIDACTUS-Trace-Id
-#    Verify it independently — no central database required
 ```
 
-> 📖 [Quickstart Guide](https://docs.veridactus.ai/quickstart) · [Protocol Specification v0.2.1](https://docs.veridactus.ai/specification/latest)
+> 📖 [Quickstart Guide](https://docs.veridactus.ai/quickstart) · [Specification v0.2.1](https://docs.veridactus.ai/specification/latest)
 
 ---
 
@@ -265,27 +266,20 @@ curl -X POST http://localhost:8080/v1/chat/completions \
 | `veridactus/veridactus-ui` | Frontend — admin dashboard | React · ReactFlow |
 | `veridactus/veridactus-python-worker` | Worker — PII detection | Python |
 
-```bash
-curl -O https://raw.githubusercontent.com/veridactus/veridactus/main/deploy/docker-compose.yml
-docker-compose up -d
-```
-
 ---
 
 ## ⚖️ Design Tradeoffs
 
-We optimize for **verifiability with zero trust** — and we're explicit about the consequences.
-
 | Tradeoff | VERIDACTUS Stance |
 |:---------|:------------------|
-| **Real‑time vs. eventual integrity** | Constraints enforced in real time; cryptographic verdict generated *eventually*, verified offline |
-| **Trace fidelity vs. performance** | Trace depth is configurable — the spec defines *what must be captured*, never *how heavy the logger must be* |
-| **Compliance vs. agility** | Aligned with W3C PROV, IETF AAT, OTel GenAI; innovation happens in namespace‑isolated extensions |
-| **Human readability vs. storage** | Audit exports are always JSON; internal storage can be Parquet, Protobuf, etc. |
+| **Real‑time vs. eventual integrity** | Constraints enforced in real time; cryptographic verdict verified offline |
+| **Trace fidelity vs. performance** | Spec defines *what must be captured*, never *how heavy the logger must be* |
+| **Compliance vs. agility** | Innovation happens in namespace‑isolated extensions |
+| **Readability vs. storage** | Audit exports always JSON; internal storage can be Parquet/Protobuf |
 
 ---
 
-## 🗓️ Evolution Roadmap
+## 🗓️ Roadmap
 
 | Version | Timeline | Milestone |
 |:--------|:---------|:----------|
@@ -294,8 +288,6 @@ We optimize for **verifiability with zero trust** — and we're explicit about t
 | **v1.1.0** | Planned | Batch governance, federated audit chains |
 | **v2.0.0** | Vision | Post‑quantum signatures, ZK proofs, TEE attestation |
 
-> 🔄 All v1.x releases guarantee **backward compatibility** for required contract fields. Major changes follow the [RFC process](https://github.com/veridactus/docs/blob/main/GOVERNANCE.md).
-
 ---
 
 ## 📚 Resources
@@ -303,8 +295,8 @@ We optimize for **verifiability with zero trust** — and we're explicit about t
 | Resource | Link |
 |:---------|:-----|
 | **Documentation Site** | [docs.veridactus.ai](https://docs.veridactus.ai) |
-| **Protocol Specification v0.2.1** | [Full Spec](https://docs.veridactus.ai/specification/latest) |
-| **OpenAPI Specification** | [api/openapi.json](https://github.com/veridactus/docs/blob/main/api/openapi.json) |
+| **Specification v0.2.1** | [Full Spec](https://docs.veridactus.ai/specification/latest) |
+| **OpenAPI** | [api/openapi.json](https://github.com/veridactus/docs/blob/main/api/openapi.json) |
 | **JSON Schemas** | [schemas/v0.2.1](https://github.com/veridactus/docs/tree/main/schemas/v0.2.1) |
 | **Conformance Suite** | [conformance/v0.2.1](https://github.com/veridactus/docs/tree/main/conformance/v0.2.1) |
 | **RFC Process** | [rfcs/README.md](https://github.com/veridactus/docs/blob/main/rfcs/README.md) |
@@ -313,23 +305,21 @@ We optimize for **verifiability with zero trust** — and we're explicit about t
 
 ## 🌐 Community & Governance
 
-VERIDACTUS follows an **Open Meritocracy** model steered by a Technical Steering Committee (TSC). All RFCs and design decisions happen transparently on GitHub.
+**Open Meritocracy** model steered by a Technical Steering Committee (TSC).
 
 | Channel | Link |
 |:--------|:-----|
-| **GitHub Discussions** | [github.com/veridactus/docs/discussions](https://github.com/veridactus/docs/discussions) |
-| **TSC Contact** | [tsc@veridactus.ai](mailto:tsc@veridactus.ai) |
-| **Security Reporting** | [security@veridactus.ai](mailto:security@veridactus.ai) |
+| **Discussions** | [github.com/veridactus/docs/discussions](https://github.com/veridactus/docs/discussions) |
+| **TSC** | [tsc@veridactus.ai](mailto:tsc@veridactus.ai) |
+| **Security** | [security@veridactus.ai](mailto:security@veridactus.ai) |
 | **Twitter / X** | [@veridactus](https://twitter.com/veridactus) |
-| **Governance Model** | [GOVERNANCE.md](https://github.com/veridactus/docs/blob/main/GOVERNANCE.md) |
-| **Contributing Guide** | [CONTRIBUTING.md](https://github.com/veridactus/docs/blob/main/CONTRIBUTING.md) |
+| **Governance** | [GOVERNANCE.md](https://github.com/veridactus/docs/blob/main/GOVERNANCE.md) |
+| **Contributing** | [CONTRIBUTING.md](https://github.com/veridactus/docs/blob/main/CONTRIBUTING.md) |
 | **Code of Conduct** | [CODE_OF_CONDUCT.md](https://github.com/veridactus/docs/blob/main/CODE_OF_CONDUCT.md) |
 
 ---
 
 ## 📄 Academic Citation
-
-If you use VERIDACTUS in research, please cite:
 
 ```bibtex
 @misc{veridactus2026,
@@ -345,8 +335,8 @@ If you use VERIDACTUS in research, please cite:
 
 <p align="center">
   <sub>
-    Licensed under <a href="https://github.com/veridactus/veridactus/blob/main/LICENSE">Apache License 2.0</a>
+    Licensed under <a href="https://github.com/veridactus/veridactus/blob/main/LICENSE">Apache 2.0</a>
     · Copyright 2026 The VERIDACTUS Authors<br>
-    "VERIDACTUS" and the VERIDACTUS logo are marks of the VERIDACTUS Protocol community
+    "VERIDACTUS" and its logo are marks of the VERIDACTUS Protocol community
   </sub>
 </p>
