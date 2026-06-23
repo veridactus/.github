@@ -4,7 +4,8 @@
 
 ### Documentation
 
-- **Protocol Specification**: [docs.veridactus.ai](https://docs.veridactus.ai)
+- **Documentation Site**: [docs.veridactus.ai](https://docs.veridactus.ai)
+- **Protocol Specification v0.2.1**: [Full Spec](https://docs.veridactus.ai/specification/latest)
 - **Quickstart Guide**: [docs.veridactus.ai/quickstart](https://docs.veridactus.ai/quickstart)
 - **Architecture Guide**: [ARCHITECTURE.md](https://github.com/veridactus/veridactus/blob/main/docs/architecture/ARCHITECTURE.md)
 
@@ -26,7 +27,7 @@
 
 ### What is VERIDACTUS?
 
-VERIDACTUS is an open governance protocol for LLM inference. It provides declarative constraints, cryptographic audit, and streaming budget control as a drop-in layer atop OpenAI-compatible APIs.
+VERIDACTUS is an open governance protocol for LLM inference. It provides declarative constraints, cryptographic audit, and streaming budget control as a drop-in layer atop OpenAI‑compatible APIs.
 
 ### How do I get started?
 
@@ -36,9 +37,9 @@ docker run -p 8080:8080 ghcr.io/veridactus/veridactus:latest
 
 Then follow the [Quickstart Guide](https://docs.veridactus.ai/quickstart).
 
-### Is VERIDACTUS production-ready?
+### Is VERIDACTUS production‑ready?
 
-VERIDACTUS is at **v0.2.1** (Working Draft). The L0 hash chain, L2A Merkle sampling, and L2B ZK proofs are production-grade. TEE attestation (L1) is in type definitions. See the [specification status](https://docs.veridactus.ai/specification/latest) for details.
+VERIDACTUS is at **v0.2.1** (Working Draft). The L0 hash chain, L2A Merkle sampling, and L2B ZK proofs are production‑grade. TEE attestation (L1) is in type definitions. See the [specification status](https://docs.veridactus.ai/specification/latest) for details.
 
 ### Can I use VERIDACTUS commercially?
 
