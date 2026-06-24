@@ -1,7 +1,7 @@
 # VERIDACTUS
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/veridactus/.github/main/assets/logo-light.svg" alt="VERIDACTUS" width="400" />
+  <img src="https://raw.githubusercontent.com/veridactus/.github/main/assets/logo-light.svg" alt="VERIDACTUS Logo" />
 </p>
 
 <p align="center">
@@ -14,65 +14,29 @@
   <a href="https://github.com/veridactus/docs/discussions">Discussions</a>
 </p>
 
----
-
-**VERIDACTUS** is a deterministic control plane that layers atop existing OpenAI‑compatible APIs, transforming every LLM invocation into an **independently‑auditable, cryptographically‑verifiable engineering event**. No server. No secret. No trust required.
+VERIDACTUS is a deterministic control plane that layers atop existing OpenAI‑compatible APIs, transforming every LLM invocation into an independently‑auditable, cryptographically‑verifiable engineering event. Through declarative constraints, state‑machine tracing, and cryptographic audit, it brings governance, budget control, and zero‑trust verification to LLM inference — delivered as standard HTTP headers, with no custom protocol required.
 
 ## Getting Started
 
-- 📖 Read the [Documentation](https://docs.veridactus.ai) for guides and tutorials
+- 📚 Read the [Documentation](https://docs.veridactus.ai) for guides and tutorials
 - 🔍 Review the [Protocol Specification v0.2.1](https://docs.veridactus.ai/specification/latest) for technical details
-- 🐳 Run the reference proxy:
+- 🐳 Run the reference proxy to start governing LLM calls:
   ```bash
   docker run -p 8080:8080 ghcr.io/veridactus/veridactus:latest
   ```
-- 🔐 Verify an audit trace offline with the [audit proof guide](https://docs.veridactus.ai/specification/latest)
-
-## Key Features
-
-- 🔐 **Cryptographic Proof Chain (L0 → L2B)** — SHA‑256 hash chain → Merkle tree sampling → Zero‑Knowledge proofs
-- 💰 **Streaming Budget Control** — Real‑time SSE budget enforcement with micro‑dollar precision
-- 🛡️ **Privacy Grading** — `raw` / `masked` / `hash_only` → TEE‑Private with GDPR right‑to‑erasure
-- 🔍 **Active Prevention** — Token‑level constrained decoding against PII, credentials, prompt injection
-- 🔗 **Delegation Chain** — Composite attestation (Ed25519 + TEE + ZK) for multi‑agent trust
-- 📋 **Compliance Ready** — Auto‑generated EU AI Act / NIST AI 600‑1 reports per inference
-- 🌍 **OWASP ASI Top 10** — Full alignment with OWASP Agentic AI Security risks
+- 🛡️ See the [Security Policy](https://github.com/veridactus/docs/blob/main/SECURITY.md) for responsible disclosure
 
 ## Project Structure
 
-- [**veridactus**](https://github.com/veridactus/veridactus) — Core implementation: Rust data plane, Go control plane, React UI
-- [**docs**](https://github.com/veridactus/docs) — Protocol specification v0.2.1, JSON schemas, OpenAPI, conformance suite, RFCs
-- [**audit-cli**](https://github.com/veridactus/audit-cli) — Offline cryptographic audit verification tool *(upcoming)*
-- [**sdk-python**](https://github.com/veridactus/sdk-python) — Python SDK with native VERIDACTUS header support *(upcoming)*
-- [**validator-js**](https://github.com/veridactus/validator-js) — JavaScript protocol validator *(upcoming)*
-
-### Docker Images
-
-| Image | Component | Stack |
-|:------|:----------|:------|
-| `veridactus/veridactus-core` | Data Plane — AI proxy gateway | Rust · Axum · SSE |
-| `veridactus/veridactus-cp` | Control Plane — config & auth | Go · SQLite · REST |
-| `veridactus/veridactus-ui` | Frontend — admin dashboard | React · ReactFlow |
-| `veridactus/veridactus-python-worker` | Worker — PII detection | Python |
-
-## Community & Governance
-
-VERIDACTUS follows an **Open Meritocracy** model steered by a Technical Steering Committee (TSC). All RFCs and design decisions happen transparently on GitHub.
-
-- 💬 [Discussions](https://github.com/veridactus/docs/discussions) — Questions, ideas, community
-- 📜 [RFC Process](https://github.com/veridactus/docs/blob/main/rfcs/README.md) — Protocol change proposals
-- 🛡️ [Security Reporting](mailto:security@veridactus.ai) — Responsible disclosure
-- 🐦 [@veridactus](https://twitter.com/veridactus) — Announcements & updates
+- [**veridactus**](https://github.com/veridactus/veridactus) — Core implementation: Rust data plane, Go control plane, React UI, and protocol documentation
+- [**docs**](https://github.com/veridactus/docs) — Protocol specification v0.2.1, JSON schemas, OpenAPI, conformance suite, and RFC process
 
 ## Contributing
 
-We welcome contributions of all kinds — specification improvements, core development, conformance tests, and documentation. See [CONTRIBUTING.md](https://github.com/veridactus/docs/blob/main/CONTRIBUTING.md) to get started.
+We welcome contributions of all kinds — specification improvements, core development, conformance tests, and documentation. See the [contributing guide](https://github.com/veridactus/docs/blob/main/CONTRIBUTING.md) to get started.
 
----
+Have questions or ideas? Join the discussion in our [community forum](https://github.com/veridactus/docs/discussions).
 
-<p align="center">
-  <sub>
-    Licensed under <a href="https://github.com/veridactus/veridactus/blob/main/LICENSE">Apache 2.0</a>
-    · Copyright 2026 The VERIDACTUS Authors
-  </sub>
-</p>
+## About
+
+VERIDACTUS is an open source project governed by an [Open Meritocracy](https://github.com/veridactus/docs/blob/main/GOVERNANCE.md) model steered by a Technical Steering Committee. Licensed under [Apache 2.0](https://github.com/veridactus/veridactus/blob/main/LICENSE). Copyright 2026 The VERIDACTUS Authors.
