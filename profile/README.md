@@ -1,7 +1,7 @@
 # VERIDACTUS
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/veridactus/.github/main/assets/logo-light.svg" alt="VERIDACTUS Logo" />
+  <img src="https://raw.githubusercontent.com/veridactus/.github/main/assets/logo-light.svg" alt="VERIDACTUS Logo" width="480" />
 </p>
 
 <p align="center">
