@@ -14,16 +14,13 @@
   <a href="https://github.com/veridactus/docs/discussions">Discussions</a>
 </p>
 
-VERIDACTUS is a deterministic control plane that layers atop existing OpenAI‑compatible APIs, transforming every LLM invocation into an independently‑auditable, cryptographically‑verifiable engineering event. Through declarative constraints, state‑machine tracing, and cryptographic audit, it brings governance, budget control, and zero‑trust verification to LLM inference — delivered as standard HTTP headers, with no custom protocol required.
+VERIDACTUS is a deterministic control plane for LLM inference. It transforms every LLM invocation into an independently‑auditable, cryptographically‑verifiable engineering event through declarative constraints, state‑machine tracing, and cryptographic audit — all delivered as standard HTTP headers on top of any OpenAI‑compatible API.
 
 ## Getting Started
 
 - 📚 Read the [Documentation](https://docs.veridactus.ai) for guides and tutorials
 - 🔍 Review the [Protocol Specification v0.2.1](https://docs.veridactus.ai/specification/latest) for technical details
-- 🐳 Run the reference proxy to start governing LLM calls:
-  ```bash
-  docker run -p 8080:8080 ghcr.io/veridactus/veridactus:latest
-  ```
+- 🐳 Run `docker run -p 8080:8080 ghcr.io/veridactus/veridactus:latest` to start governing LLM calls
 - 🛡️ See the [Security Policy](https://github.com/veridactus/docs/blob/main/SECURITY.md) for responsible disclosure
 
 ## Project Structure
