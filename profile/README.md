@@ -9,17 +9,17 @@
 </p>
 
 <p align="center">
-  <a href="https://docs.veridactus.ai">Documentation</a> |
-  <a href="https://docs.veridactus.ai/specification/latest">Specification</a> |
-  <a href="https://github.com/veridactus/docs/discussions">Discussions</a>
+  <a href="https://self-17a687b3.mintlify.app/docs">Documentation</a> |
+  <a href="https://self-17a687b3.mintlify.app/docs/specification/latest">Specification</a> |
+  <a href="https://github.com/orgs/veridactus/discussions">Discussions</a>
 </p>
 
 VERIDACTUS is a deterministic control plane for LLM inference. It transforms every LLM invocation into an independently‑auditable, cryptographically‑verifiable engineering event through declarative constraints, state‑machine tracing, and cryptographic audit — all delivered as standard HTTP headers on top of any OpenAI‑compatible API.
 
 ## Getting Started
 
-- 📚 Read the [Documentation](https://docs.veridactus.ai) for guides and tutorials
-- 🔍 Review the [Protocol Specification v0.2.1](https://docs.veridactus.ai/specification/latest) for technical details
+- 📚 Read the [Documentation](https://self-17a687b3.mintlify.app/docs) for guides and tutorials
+- 🔍 Review the [Protocol Specification v0.2.1](https://self-17a687b3.mintlify.app/docs/specification/latest) for technical details
 - 🐳 Run `docker run -p 8080:8080 ghcr.io/veridactus/veridactus:latest` to start governing LLM calls
 - 🛡️ See the [Security Policy](https://github.com/veridactus/docs/blob/main/SECURITY.md) for responsible disclosure
 
@@ -32,7 +32,7 @@ VERIDACTUS is a deterministic control plane for LLM inference. It transforms eve
 
 We welcome contributions of all kinds — specification improvements, core development, conformance tests, and documentation. See the [contributing guide](https://github.com/veridactus/docs/blob/main/CONTRIBUTING.md) to get started.
 
-Have questions or ideas? Join the discussion in our [community forum](https://github.com/veridactus/docs/discussions).
+Have questions or ideas? Join the discussion in our [community forum](https://github.com/orgs/veridactus/discussions).
 
 ## About
 
